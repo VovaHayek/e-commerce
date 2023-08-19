@@ -1,0 +1,14 @@
+.product {
+  transition: .5s ease-in-out;
+}
+
+.product:hover {
+  box-shadow:
+  0.1px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+  0.1px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+  0.3px 12.5px 10px rgba(0, 0, 0, 0.035),
+  0.4px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+  0.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+  2px 100px 80px rgba(0, 0, 0, 0.07)
+;
+}
