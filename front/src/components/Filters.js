@@ -17,7 +17,7 @@ const Filters = ({productsGetFunction}) => {
     }
 
   return (
-    <div>
+    <div className='mb-1'>
         <div className='d-flex flex-row justify-content-center align-items-center mb-3'>
             <Filter />
             <h2 className='mx-1 mt-1'>Filters</h2>
@@ -28,7 +28,7 @@ const Filters = ({productsGetFunction}) => {
                 <select name="categories" id="categories" className='form-control mb-3'>
                     <option value=''>Choose Category</option>
                     {categories.map((category, index) => (
-                        <option value={category.category_name}>{category.category_name}</option>
+                        <option key={index} value={category.category_name}>{category.category_name}</option>
                     ))}
                 </select>
             </div>
@@ -38,11 +38,11 @@ const Filters = ({productsGetFunction}) => {
                 <div>
                     <div>
                         <label htmlFor="from_price">From:</label>
-                        <input type="number" name="from_price" className="form-control" defaultValue={0} />
+                        <input type="number" name="from_price" id='from_price' className="form-control" defaultValue={0} />
                     </div>
                     <div>
                         <label htmlFor="to_price">To:</label>
-                        <input type="number" name="to_price" className="form-control" defaultValue={0} />
+                        <input type="number" name="to_price" id='to_price' className="form-control" defaultValue={0} />
                     </div>
                 </div>
             </div>

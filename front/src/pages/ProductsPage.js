@@ -19,7 +19,7 @@ const ProductsPage = () => {
 
   return (
     <div className='row mt-5 m-0'>
-        <div className='col-12 col-lg-2 border border-top-0'>
+        <div className='col-12 col-lg-2 border border-top-0 mb-3'>
             <Filters productsGetFunction={getProducts} />
         </div>
         <div className='col-12 col-lg-10 d-flex flex-column justify-content-center align-items-center'>
