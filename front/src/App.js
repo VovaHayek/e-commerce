@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" exact Component={ProductsPage} />
           <Route path='/cart/' Component={CartPage} />
-          <Route path='/login/' Component={AuthenticationPage} />
+          <Route path='/auth/' Component={AuthenticationPage} />
           <Route path='/logout/' Component={Logout} />
         </Routes>
       </div>

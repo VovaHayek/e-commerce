@@ -20,7 +20,7 @@ const Header = () => {
         <a href='/' className='link-underline link-underline-opacity-0'><h1 className='text-white fw-bold'>Vova Hayek Shop</h1></a>
         
         {isAuth ? <div><a href='#' className='text-white mx-2'><Account /></a> <a href='/logout/' className='text-white mx-2'><Logout /></a></div> :
-                  <div><a href='/login/' className='btn btn-primary'>Sign In</a> <a href='/' className='btn btn-dark'>Sign Up</a></div>}
+                  <div><a href='/auth/' className='btn btn-dark'>Sign In</a></div>}
         
     </div>
   )
