@@ -4,6 +4,10 @@ import { ReactComponent as Filter } from '../assets/filter.svg'
 
 const Filters = ({productsGetFunction}) => {
 
+    let [minPrice, setMinPrice] = useState()
+    let [maxPrice, setMaxPrice] = useState()
+    let [category, setCategory] = useState()
+
     let [categories, setCategories] = useState([])
 
     useEffect(() => {
@@ -16,16 +20,26 @@ const Filters = ({productsGetFunction}) => {
         setCategories(data);
     }
 
+    function makeFiltration(e) {
+        e.preventDefault()
+        let filters = {
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            category: category
+        }
+        productsGetFunction(filters);
+    }
+
   return (
     <div className='mb-1'>
         <div className='d-flex flex-row justify-content-center align-items-center mb-3'>
             <Filter />
             <h2 className='mx-1 mt-1'>Filters</h2>
         </div>
-        <form onSubmit={productsGetFunction}>
+        <form onSubmit={(e) => makeFiltration(e)}>
             <div>
                 <h4>Categories:</h4>
-                <select name="categories" id="categories" className='form-control mb-3'>
+                <select name="categories" id="categories" className='form-control mb-3' onChange={(e) => setCategory(e.target.value)}>
                     <option value=''>Choose Category</option>
                     {categories.map((category, index) => (
                         <option key={index} value={category.category_name}>{category.category_name}</option>
@@ -38,11 +52,11 @@ const Filters = ({productsGetFunction}) => {
                 <div>
                     <div>
                         <label htmlFor="from_price">From:</label>
-                        <input type="number" name="from_price" id='from_price' className="form-control" defaultValue={0} />
+                        <input type="number" name="from_price" id='from_price' className="form-control" defaultValue={0} onChange={(e) => setMinPrice(e.target.value)} />
                     </div>
                     <div>
                         <label htmlFor="to_price">To:</label>
-                        <input type="number" name="to_price" id='to_price' className="form-control" defaultValue={0} />
+                        <input type="number" name="to_price" id='to_price' className="form-control" defaultValue={0} onChange={(e) => setMaxPrice(e.target.value)} />
                     </div>
                 </div>
             </div>

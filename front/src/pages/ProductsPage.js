@@ -12,7 +12,13 @@ const ProductsPage = () => {
     }, [])
 
     let getProducts = async (e) => {
-        let response = await fetch('http://127.0.0.1:8000/products');
+        let parameters = new URLSearchParams();
+        parameters.append("product_price_min", e?.minPrice || '');
+        parameters.append("product_price_max", e?.maxPrice || '');
+        parameters.append("category", e?.category || '');
+        parameters.append("product_name", e?.productName || '');
+
+        let response = await fetch('http://127.0.0.1:8000/products?' + parameters);
         let data = await response.json();
         setProduct(data);
     }
@@ -24,8 +30,7 @@ const ProductsPage = () => {
         </div>
         <div className='col-12 col-lg-10 d-flex flex-column justify-content-center align-items-center'>
             <div className='w-100 mb-3 d-flex flex-row'>
-                <input type='text' className='form-control' placeholder='Search...' />
-                <button className='btn btn-primary rounded-end'>Search</button>
+                <input type='text' className='form-control' placeholder='Search...' onChange={(e) => getProducts({productName: e.target.value})} />
             </div>
             <div className='col-12 col-lg-10 d-flex justify-content-evenly align-items-center flex-wrap'>
                 {products.map((product, index) => (

@@ -19,8 +19,9 @@ class ProductList(APIView):
     List all snippets, or create a new snippet.
     """
     def get(self, request, format=None):
-        products = Product.objects.all()
-        serializer = ProductSerializer(products, many=True)
+        #products = Product.objects.all()
+        products = ProductFilter(request.GET, queryset=Product.objects.all())
+        serializer = ProductSerializer(products.qs, many=True)
         return Response(serializer.data)
 
 """@api_view(['GET'])
