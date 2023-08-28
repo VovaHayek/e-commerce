@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const ProductItem = ({product}) => {
+const ProductItem = ({product, callNotification}) => {
 
   let [cartProduct, setCartProduct] = useState([])
 
@@ -48,7 +48,7 @@ const ProductItem = ({product}) => {
       </div>
         <h3>{product.product_name}</h3>
         <h2>${product.product_price}</h2>
-        <button className='btn btn-primary px-5 py-2 mt-3' onClick={addToCart}>&#128722; Add to Cart</button>
+        <button className='btn btn-primary px-5 py-2 mt-3' onClick={(e) => {addToCart(); callNotification()}}>&#128722; Add to Cart</button>
     </div>
   )
 }

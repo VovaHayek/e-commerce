@@ -12,3 +12,22 @@
   2px 100px 80px rgba(0, 0, 0, 0.07)
 ;
 }
+
+.pop-up-notification {
+  animation: notification 3s infinite;
+}
+
+@keyframes notification {
+  0% {
+    top: -15%;
+  }
+  30% {
+    top: 3%;
+  }
+  70% {
+    top: 3%;
+  }
+  100% {
+    top: -15%;
+  }
+}

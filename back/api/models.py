@@ -22,4 +22,3 @@ class Order(models.Model):
     amount = models.IntegerField(default=0)
     account = models.ForeignKey(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
-
