@@ -38,7 +38,7 @@ const ProductsPage = () => {
     
     <div className='row mt-5 m-0'>
 
-        <div className='bg-primary bg-opacity-50 text-white position-absolute end-0 m-2' style={{width: '20vw', height: '10vh', top: '-15%'}} id='add-to-cart-notification'>
+        <div className='bg-primary bg-opacity-50 text-white position-fixed end-0 m-2' style={{width: '20vw', height: '10vh', top: '-15%'}} id='add-to-cart-notification'>
             <p className='text-center'>Item has been added to the Cart!</p>
         </div>
 

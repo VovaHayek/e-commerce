@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 from django.contrib.auth.models import User
 
@@ -20,5 +21,17 @@ class Product(models.Model):
 class Order(models.Model):
     products = models.ManyToManyField(Product, blank=True)
     amount = models.IntegerField(default=0)
-    account = models.ForeignKey(User, on_delete=models.CASCADE)
+    account = models.ForeignKey(User, on_delete=models.DO_NOTHING, unique=True)
     active = models.BooleanField(default=True)
+
+class FinishedOrder(models.Model):
+    full_name = models.CharField(max_length=150)
+    address = models.CharField(max_length=250)
+    city = models.CharField(max_length=100)
+    products = models.ManyToManyField(Product, blank=False)
+    amount = models.IntegerField()
+    account = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    order_time = models.DateTimeField(default=timezone.now())
+
+    def __str__(self):
+        return self.full_name

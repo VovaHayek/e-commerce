@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import CategorySerializer, ProductSerializer, OrderSerializer
-from .models import Categories, Product, Order
+from .models import Categories, Product, Order, FinishedOrder
 from .filters import ProductFilter
 
 def count_amount(products):
@@ -15,22 +15,10 @@ def count_amount(products):
     return amount
 
 class ProductList(APIView):
-    """
-    List all snippets, or create a new snippet.
-    """
     def get(self, request, format=None):
-        #products = Product.objects.all()
         products = ProductFilter(request.GET, queryset=Product.objects.all())
         serializer = ProductSerializer(products.qs, many=True)
         return Response(serializer.data)
-
-"""@api_view(['GET'])
-def get_products(request):
-    products = Product.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filter_class = ProductFilter
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)"""
 
 @api_view(['GET'])
 def get_cart(request):
@@ -73,3 +61,17 @@ def get_categories(request):
     categories = Categories.objects.all()
     serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
+
+class FinishOrder(APIView):
+    def post(self, request):
+        print("WORKS!!!!!!!!!")
+        data = request.data
+        active_order = Order.objects.get(account=1)
+        print(data)
+        if data:
+            finishing_order = FinishedOrder.objects.create(full_name=data['full_name'], address=data['address'], city=data['city'], amount=active_order.amount, account_id=1)
+            for product in active_order.products.all():
+                finishing_order.products.add(product.id)
+            finishing_order.save()
+            active_order.delete()
+        return None
