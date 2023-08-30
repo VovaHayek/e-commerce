@@ -5,7 +5,7 @@ const ProductItem = ({product, callNotification}) => {
   let [cartProduct, setCartProduct] = useState([])
 
   let CreateCart = async () => {
-    let cart = fetch('http://127.0.0.1:8000/cart/create', {
+    let cart = fetch('http://127.0.0.1:8000/cart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -15,7 +15,7 @@ const ProductItem = ({product, callNotification}) => {
   }
 
   let UpdateCart = async () => {
-    let cart = fetch('http://127.0.0.1:8000/cart/update_cart', {
+    let cart = fetch('http://127.0.0.1:8000/cart', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

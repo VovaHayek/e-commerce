@@ -18,13 +18,13 @@ const CartPage = () => {
     }, []);
 
     let getOrders = async () => {
-        let response = await fetch('http://127.0.0.1:8000/cart');
+        let response = await fetch('http://127.0.0.1:8000/cart', {method: 'GET'});
         let data = await response.json();
         setOrder(data);
     }
 
     let removeOrderProduct = async (product_id, product_price) => {
-      fetch('http://127.0.0.1:8000/cart/remove_product', {
+      fetch('http://127.0.0.1:8000/cart', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

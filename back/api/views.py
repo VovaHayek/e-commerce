@@ -20,41 +20,38 @@ class ProductList(APIView):
         serializer = ProductSerializer(products.qs, many=True)
         return Response(serializer.data)
 
-@api_view(['GET'])
-def get_cart(request):
-    cart = Order.objects.get(account=1, active=True)
-    serializer = OrderSerializer(cart, many=False)
-    return Response(serializer.data)
+class Cart(APIView):
+    def get(self, request):
+        cart = Order.objects.get(account=1, active=True)
+        serializer = OrderSerializer(cart, many=False)
+        return Response(serializer.data)
 
-@api_view(['POST'])
-def create_cart(request):
-    data = request.data
-    cart = Order.objects.create(account_id=1)
-    cart.products.add(data['id'])
-    cart.amount += data['product_price']
-    cart.save()
-    serializer = OrderSerializer(cart, many=False)
-    return Response(serializer.data)
-
-@api_view(['PUT'])
-def update_cart(request):
-    data = request.data
-    cart = Order.objects.get(account_id=1, active=True)
-    cart.products.add(data['id'])
-    cart.amount = count_amount(cart.products.all())
-    cart.save()
-    serializer = OrderSerializer(cart, many=False)
-    return Response(serializer.data)
-
-@api_view(['DELETE'])
-def remove_cart_product(request):
-    data = request.data
-    cart = Order.objects.get(account_id=1, active=True)
-    cart.products.remove(data['product_id'])
-    cart.amount = count_amount(cart.products.all())
-    cart.save()
-    serializer = OrderSerializer(cart, many=False)
-    return Response(serializer.data)
+    def post(self, request):
+        data = request.data
+        cart = Order.objects.create(account_id=1)
+        cart.products.add(data['id'])
+        cart.amount += data['product_price']
+        cart.save()
+        serializer = OrderSerializer(cart, many=False)
+        return Response(serializer.data)
+    
+    def put(self, request):
+        data = request.data
+        cart = Order.objects.get(account_id=1, active=True)
+        cart.products.add(data['id'])
+        cart.amount = count_amount(cart.products.all())
+        cart.save()
+        serializer = OrderSerializer(cart, many=False)
+        return Response(serializer.data)
+    
+    def delete(self, request):
+        data = request.data
+        cart = Order.objects.get(account_id=1, active=True)
+        cart.products.remove(data['product_id'])
+        cart.amount = count_amount(cart.products.all())
+        cart.save()
+        serializer = OrderSerializer(cart, many=False)
+        return Response(serializer.data)
 
 @api_view(['GET'])
 def get_categories(request):
