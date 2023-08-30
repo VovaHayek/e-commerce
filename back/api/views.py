@@ -3,8 +3,10 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated
 
-from .serializers import CategorySerializer, ProductSerializer, OrderSerializer
+from .serializers import CategorySerializer, ProductSerializer, OrderSerializer, UserSerializer
 from .models import Categories, Product, Order, FinishedOrder
 from .filters import ProductFilter
 
@@ -72,3 +74,10 @@ class FinishOrder(APIView):
             finishing_order.save()
             active_order.delete()
         return None
+    
+class Account(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        account = request.user
+        serializer = UserSerializer(account, many=False)
+        return Response(serializer.data)

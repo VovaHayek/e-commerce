@@ -7,5 +7,6 @@ urlpatterns = [
     path('products', views.ProductList.as_view()),
     path('categories', views.get_categories),
     path('cart', views.Cart.as_view()),
-    path('order', views.FinishOrder.as_view())
+    path('order', views.FinishOrder.as_view()),
+    path('account', views.Account.as_view())
 ]

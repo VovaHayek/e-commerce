@@ -6,6 +6,7 @@ import CartPage from './pages/CartPage'
 import Header from './components/Header'
 import Logout from './components/Logout'
 import AuthenticationPage from './pages/AuthenticationPage'
+import AccountPage from './pages/AccountPage'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/cart/' Component={CartPage} />
           <Route path='/auth/' Component={AuthenticationPage} />
           <Route path='/logout/' Component={Logout} />
+          <Route path='/account/' Component={AccountPage} />
         </Routes>
       </div>
     </Router>
